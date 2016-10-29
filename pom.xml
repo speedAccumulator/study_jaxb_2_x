@@ -40,6 +40,9 @@
 	                
 				    <!-- The package of your generated sources -->
 				    <packageName>z1f.study.schemaGenerateBeans</packageName>
+				    
+				    <!--set the JAXB runtime version to 2.1  重点是runtime(运行期)，可惜暂时没有办法尝试-->
+				    <target>2.1</target>
 				</configuration>
 			</plugin>
 
