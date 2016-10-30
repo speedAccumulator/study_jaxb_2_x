@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>z1f.study.jaxb</groupId>
+	<artifactId>study-jaxb_2_x</artifactId>
+	<version>0.0.1</version>
+	
+
+	
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+	        <plugins>
+	            <!--
+	                If we e.g. execute on JDK 1.7, we should compile for Java 7 to get
+	                the same (or higher) JAXB API version as used during the xjc execution.
+	            -->
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-compiler-plugin</artifactId>
+	                <configuration>
+	                    <source>1.8</source>
+	                    <target>1.8</target>
+	                </configuration>
+	            </plugin>
+	        </plugins>
+	    </pluginManagement>
+	
+	
+		<plugins>
+		
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<!--<version>2.1</version>-->
+				<executions>
+				    <execution>
+				        <id>xjc-1</id>
+				        <goals>
+				            <goal>xjc</goal>
+				        </goals>
+						<configuration>
+							<!-- Define the directory where we should find the shcema files -->
+							<!--如果不指定sources，默认会在目录src/main/xjb中寻找schema文件-->
+							<!--如果在指定定的sources中找不到schema文件，则会报错： NoSchemasException-->
+			                <sources>
+			                    <source>${project.basedir}/src/main/resources/schemas</source>
+			                </sources>
+			                
+			                <!-- Indicate that we should use DTD input instead of XSDs -->
+		                	<!--<sourceType>dtd</sourceType>-->
+			                
+						    <!-- The package of your generated sources -->
+						    <packageName>z1f.study.schemaGenerateBeans</packageName>
+						    
+						    <!--set the JAXB runtime version to 2.1  重点是runtime(运行期)，可惜暂时没有办法尝试-->
+						    <!--<target>2.1</target>-->
+						</configuration>
+					</execution>
+					<execution>
+				        <id>xjc-2</id>
+				        <goals>
+				            <goal>xjc</goal>
+				        </goals>
+						<configuration>
+							<!-- Define the directory where we should find the shcema files -->
+							<!--如果不指定sources，默认会在目录src/main/xjb中寻找schema文件-->
+							<!--如果在指定定的sources中找不到schema文件，则会报错： NoSchemasException-->
+			                <sources>
+			                    <source>${project.basedir}/src/main/resources/schema_ext</source>
+			                </sources>
+			                
+			                <!-- Indicate that we should use DTD input instead of XSDs -->
+		                	<!--<sourceType>dtd</sourceType>-->
+			                
+						    <!-- The package of your generated sources -->
+						    <packageName>z1f.study.ext_schemaGenerateBeans</packageName>
+						    
+						    <!--set the JAXB runtime version to 2.1  重点是runtime(运行期)，可惜暂时没有办法尝试-->
+						    <!--<target>2.1</target>-->
+						</configuration>
+					</execution>
+				</executions>
+			
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
